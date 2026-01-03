@@ -2,46 +2,54 @@ import { useEffect, useState } from "react"
 import { type Habit } from "./types/habit"
 import { HabitList } from "./components/HabitList"
 import { ProgressBar } from "./components/ProgressBar"
+import { AddHabit } from "./components/AddHabit"
 import { loadHabits, saveHabits } from "./utils/storage"
 
 const today = new Date().toISOString().slice(0, 10)
 
-const DEFAULT_HABITS: Habit[] = [
-  { id: "1", title: "Wasser", completedDates: [] },
-  { id: "2", title: "Sport", completedDates: [] },
-  { id: "3", title: "Essen", completedDates: [] },
-]
-
 function App() {
-  const [habits, setHabits] = useState<Habit[]>(
-    () => loadHabits().length ? loadHabits() : DEFAULT_HABITS
-  )
+  const [habits, setHabits] = useState<Habit[]>(() => loadHabits())
 
   useEffect(() => {
     saveHabits(habits)
   }, [habits])
 
+  const addHabit = (title: string) => {
+    setHabits(prev => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        title,
+        completedDates: [],
+      },
+    ])
+  }
+
+  const deleteHabit = (id: string) => {
+    setHabits(prev => prev.filter(h => h.id !== id))
+  }
+
   const toggleHabit = (id: string) => {
     setHabits(prev =>
-      prev.map(habit =>
-        habit.id === id
+      prev.map(h =>
+        h.id === id
           ? {
-              ...habit,
-              completedDates: habit.completedDates.includes(today)
-                ? habit.completedDates.filter(d => d !== today)
-                : [...habit.completedDates, today],
+              ...h,
+              completedDates: h.completedDates.includes(today)
+                ? h.completedDates.filter(d => d !== today)
+                : [...h.completedDates, today],
             }
-          : habit
+          : h
       )
     )
   }
 
-  const completedCount = habits.filter(h =>
+  const completed = habits.filter(h =>
     h.completedDates.includes(today)
   ).length
 
   const progress = habits.length
-    ? (completedCount / habits.length) * 100
+    ? (completed / habits.length) * 100
     : 0
 
   return (
@@ -51,10 +59,13 @@ function App() {
 
         <ProgressBar progress={progress} />
 
+        <AddHabit onAdd={addHabit} />
+
         <HabitList
           habits={habits}
           today={today}
           onToggle={toggleHabit}
+          onDelete={deleteHabit}
         />
       </div>
     </div>

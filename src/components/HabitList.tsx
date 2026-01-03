@@ -5,9 +5,15 @@ interface Props {
   habits: Habit[]
   today: string
   onToggle: (id: string) => void
+  onDelete: (id: string) => void
 }
 
-export const HabitList = ({ habits, today, onToggle }: Props) => {
+export const HabitList = ({
+  habits,
+  today,
+  onToggle,
+  onDelete,
+}: Props) => {
   return (
     <div className="space-y-3">
       {habits.map(habit => (
@@ -16,6 +22,7 @@ export const HabitList = ({ habits, today, onToggle }: Props) => {
           habit={habit}
           today={today}
           onToggle={onToggle}
+          onDelete={onDelete}
         />
       ))}
     </div>
