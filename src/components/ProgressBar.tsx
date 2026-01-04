@@ -6,7 +6,7 @@ export const ProgressBar = ({ progress }: Props) => {
   return (
     <div>
       <div className="flex justify-between text-gray-400 dark:text-gray-500 mb-1">
-        <span>Сегодня</span>
+        <span>Heute</span>
         <span>{Math.round(progress)}%</span>
       </div>
 

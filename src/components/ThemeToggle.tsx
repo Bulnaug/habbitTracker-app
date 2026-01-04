@@ -10,7 +10,7 @@ export const ThemeToggle = ({ theme, toggle }: Props) => {
       className="text-sm px-3 py-1 rounded border
         dark:bg-gray-800 dark:text-white"
     >
-      {theme === "dark" ? "☀️ Светлая" : "🌙 Тёмная"}
+      {theme === "dark" ? "☀️ Hell" : "🌙 Dunkel"}
     </button>
   )
 }

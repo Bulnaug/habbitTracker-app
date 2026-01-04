@@ -8,7 +8,7 @@ interface Props {
 export const Achievements = ({ achievements, unlocked }: Props) => {
   return (
     <div>
-      <h2 className="text-sm font-semibold mb-2">Достижения</h2>
+      <h2 className="text-sm font-semibold mb-2">Achivements</h2>
       <div className="grid grid-cols-2 gap-3">
         {achievements.map(a => {
           const isUnlocked = unlocked.includes(a.id)

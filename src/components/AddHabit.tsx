@@ -18,7 +18,7 @@ export const AddHabit = ({ onAdd }: Props) => {
       <input
         value={title}
         onChange={e => setTitle(e.target.value)}
-        placeholder="Новая привычка"
+        placeholder="Neue Habit"
         className="
             flex-1 px-3 py-2 rounded-lg
             border border-gray-300 dark:border-gray-600

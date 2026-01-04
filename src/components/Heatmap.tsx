@@ -21,7 +21,7 @@ export const Heatmap = ({ habits }: Props) => {
 
   return (
     <div>
-      <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-4">Активность за 30 дней</h2>
+      <h2 className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-4">Aktivität in 30 Tagen</h2>
       <div className="grid grid-cols-10 gap-1">
         {days.map(day => (
           <div
@@ -35,11 +35,11 @@ export const Heatmap = ({ habits }: Props) => {
         ))}
       </div>
       <div className="flex items-center gap-2 mt-4 text-xs">
-        <span className="text-gray-400 dark:text-gray-100">Мало</span>
+        <span className="text-gray-400 dark:text-gray-100">Wenig</span>
         <div className="w-4 h-4 bg-gray-200 rounded-md" />
         <div className="w-4 h-4 bg-green-300 rounded-md" />
         <div className="w-4 h-4 bg-green-600 rounded-md" />
-        <span className="text-gray-400 dark:text-gray-100">Много</span>
+        <span className="text-gray-400 dark:text-gray-100">Viel</span>
       </div>
     </div>
   )
