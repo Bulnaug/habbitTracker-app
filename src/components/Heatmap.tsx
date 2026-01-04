@@ -27,15 +27,18 @@ export const Heatmap = ({ habits }: Props) => {
           <div
             key={day}
             title={day}
-            className={`w-4 h-4 rounded ${getIntensity(day)}`}
+            className={`w-4 h-4
+                rounded-md
+                transition
+                hover:scale-110 ${getIntensity(day)}`}
           />
         ))}
       </div>
       <div className="flex items-center gap-2 mt-4 text-xs">
         <span className="text-gray-400 dark:text-gray-100">Мало</span>
-        <div className="w-4 h-4 bg-gray-200 rounded" />
-        <div className="w-4 h-4 bg-green-300 rounded" />
-        <div className="w-4 h-4 bg-green-600 rounded" />
+        <div className="w-4 h-4 bg-gray-200 rounded-md" />
+        <div className="w-4 h-4 bg-green-300 rounded-md" />
+        <div className="w-4 h-4 bg-green-600 rounded-md" />
         <span className="text-gray-400 dark:text-gray-100">Много</span>
       </div>
     </div>

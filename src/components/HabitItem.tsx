@@ -23,7 +23,9 @@ export const HabitItem = ({
         flex-1 px-3 py-2 rounded-lg
         px-3 py-2 rounded-lg
         border border-gray-200 dark:border-gray-700
-        hover:bg-gray-50 dark:hover:bg-gray-700
+        hover:scale-[1.01]
+        transition-all
+        duration-200
     ">
       <div className="flex justify-between items-center">
         <div>
@@ -38,20 +40,39 @@ export const HabitItem = ({
         <div className="flex gap-2">
           <button
             onClick={() => onToggle(habit.id)}
-            className={`w-10 h-10 rounded-lg text-white transition ${
-              completedToday
-                ? "bg-green-500"
-                : "bg-gray-400"
-            }`}
+            className={`
+                p-2
+                rounded-lg
+                opacity-60
+                transition
+                hover:opacity-100
+                hover:scale-110
+                active:scale-95
+                focus:outline-none
+                focus:ring-2
+                focus:ring-white/20
+                ${completedToday ? "text-green-500" : "text-gray-400"}
+            `}
           >
-            ✔
+            <span className="text-xl">✓</span>
           </button>
 
           <button
             onClick={() => onDelete(habit.id)}
-            className="w-10 h-10 rounded-lg bg-red-500 text-white"
+            className="
+                p-2
+                rounded-lg
+                opacity-50
+                transition
+                hover:opacity-100
+                hover:scale-110
+                active:scale-95
+                focus:outline-none
+                focus:ring-2
+                focus:ring-white/20
+            "
           >
-            🗑
+             🗑
           </button>
         </div>
       </div>
