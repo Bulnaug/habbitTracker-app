@@ -1,5 +1,6 @@
 export interface Habit {
   id: string
   title: string
-  completedDates: string[] // YYYY-MM-DD
+  completedDates: string[]
+  achievements?: string[] // ids достижений
 }

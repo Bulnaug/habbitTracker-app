@@ -1,5 +1,7 @@
 import { type Habit } from "../types/habit"
 import { calculateStreak } from "../utils/streak"
+import { Achievements } from "./Achievements"
+import { ACHIEVEMENTS } from "../data/achievements"
 
 interface Props {
   habit: Habit
@@ -18,13 +20,17 @@ export const HabitItem = ({
   const streak = calculateStreak(habit.completedDates)
 
   return (
-    <div className="flex items-center justify-between p-3 border rounded-lg">
+    <div className="flex items-center justify-between p-3 border rounded-lg bg-white dark:bg-gray-800">
       <div>
         <div className="font-medium">{habit.title}</div>
         <div className="text-sm text-gray-500">
           🔥 Streak: {streak} дн.
         </div>
       </div>
+      <Achievements
+        achievements={ACHIEVEMENTS}
+        unlocked={habit.achievements ?? []}
+      />
 
       <div className="flex gap-2">
         <button
