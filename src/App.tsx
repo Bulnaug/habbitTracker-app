@@ -8,15 +8,26 @@ import { loadHabits, saveHabits } from "./utils/storage"
 import { calculateStreak } from "./utils/streak"
 import { ACHIEVEMENTS } from "./data/achievements"
 import { checkAchievements } from "./utils/achievements"
-import { useTheme } from "./hooks/useTheme"
-import { ThemeToggle } from "./components/ThemeToggle"
 
 const today = new Date().toISOString().slice(0, 10)
+type Theme = 'light' | 'dark'
+
 
 
 function App() {
   const [habits, setHabits] = useState<Habit[]>(() => loadHabits())
-  const { theme, setTheme } = useTheme()
+  const [theme, setTheme] = useState<Theme>(() => {
+    const saved = localStorage.getItem('theme') as Theme | null
+    if (saved) return saved
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
+  })
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   useEffect(() => {
     saveHabits(habits)
@@ -71,13 +82,29 @@ function App() {
     : 0
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-black dark:text-white p-6">
-      <div className="max-w-md mx-auto space-y-6">
-        <h1 className="text-2xl font-bold text-center">Habit Tracker</h1>
-        <ThemeToggle
-          theme={theme}
-          toggle={() => setTheme(theme === "dark" ? "light" : "dark")}
-        />
+    <div 
+      className={`min-h-screen p-6 ${
+        theme === 'dark' ? 'dark bg-gray-900' : 'bg-gray-100'
+      }`}
+    >
+      <div className="
+        max-w-md mx-auto space-y-8
+        bg-white dark:bg-gray-800
+        text-gray-800 dark:text-gray-100
+        rounded-xl shadow-lg p-6
+      ">
+       <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center">Habit Tracker</h1>
+        <button
+          onClick={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
+          className="
+            absolute top-4 right-4
+            p-2 rounded-full
+            bg-gray-200 dark:bg-gray-700
+            hover:scale-105 transition
+          "
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
 
         <ProgressBar progress={progress} />
 
