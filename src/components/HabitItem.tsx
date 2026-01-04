@@ -27,7 +27,7 @@ export const HabitItem = ({
         transition-all
         duration-200
     ">
-      <div className="flex justify-between items-center">
+      <div className="group flex justify-between items-center">
         <div>
           <h3 className="font-semibold text-lg">
             {habit.title}
@@ -37,7 +37,7 @@ export const HabitItem = ({
           </span>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition">
           <button
             onClick={() => onToggle(habit.id)}
             className={`
