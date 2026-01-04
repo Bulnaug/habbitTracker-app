@@ -1,4 +1,4 @@
-# ✅ Habit Tracker
+# ✅ Gewohnheits Tracker
 
 Tracker für die Erledigung täglicher Aufgaben. Mit Progressbar und Challenges.
 
@@ -16,7 +16,7 @@ https://habbit-tracker-app-pi.vercel.app/
 - ☑️ Habit absolviert
 - 📊 Tagliche Progressbar
 - 📅 Monatliche Ubersicht
-- 🏆 Langfristige Achivements
+- 🏆 Langfristige Achivements ( 7 Tage | 14 Tage | 30 Tage )
 - 🌗 Dark Mode
 
 ---

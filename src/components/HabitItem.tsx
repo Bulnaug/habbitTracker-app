@@ -19,17 +19,18 @@ export const HabitItem = ({
   const streak = calculateStreak(habit.completedDates)
 
   return (
-    <div className="
-        flex-1 px-3 py-2 rounded-lg
-        px-3 py-2 rounded-lg
-        border border-gray-200 dark:border-gray-700
-        hover:scale-[1.01]
-        transition-all
-        duration-200
-    ">
+    <div className={`
+            flex-1 px-3 py-2 rounded-lg
+            px-3 py-2 rounded-lg
+            border border-gray-200 dark:border-gray-700
+            hover:scale-[1.01]
+            transition-all
+            duration-200
+            ${completedToday ? "opacity-70" : "opacity-100"}
+        `}>
       <div className="group flex justify-between items-center">
         <div>
-          <h3 className="font-semibold text-lg">
+          <h3 className={`font-semibold text-lg ${completedToday ? "line-through opacity-60" : ""}`}>
             {habit.title}
           </h3>
           <span className="text-sm text-gray-400 dark:text-gray-500">
