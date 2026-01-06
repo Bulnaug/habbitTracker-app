@@ -1,17 +1,6 @@
 import { today } from "../utils/date"
-import type { Id } from "../../convex/_generated/dataModel"
 import { calculateProgress, calculateStreak } from "../hooks/habitStats"
 
-
-type Props = {
-  habit: {
-    _id: Id<"habits">
-    title: string
-    completedDates: string[]
-  }
-  onDelete: (id: Id<"habits">) => void
-  onToggle: (id: Id<"habits">) => void
-}
 
 export function HabitItem({
   habit,
@@ -35,16 +24,16 @@ export function HabitItem({
          `}
     > 
       <div className="mt-2">
-        {/* фон */}
+        
         <div className="h-2 w-full rounded bg-muted">
-          {/* заливка */}
+         
           <div
             className="h-2 rounded bg-primary transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
 
-        {/* подпись */}
+        
         <div className="mt-1 text-xs text-muted-foreground">
           {progress}% за последние 7 дней
         </div>
