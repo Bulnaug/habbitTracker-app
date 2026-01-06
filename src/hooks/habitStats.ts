@@ -1,8 +1,5 @@
 import { today, getLastNDays } from "../utils/date"
 
-/**
- * Streak: сколько дней подряд выполнено до сегодня
- */
 export const calculateStreak = (completedDates: string[]): number => {
   let streak = 0
   const day = new Date(today())
@@ -18,9 +15,6 @@ export const calculateStreak = (completedDates: string[]): number => {
   return streak
 }
 
-/**
- * Progress за последние N дней (0–100)
- */
 export const calculateProgress = (
   completedDates: string[],
   days = 7

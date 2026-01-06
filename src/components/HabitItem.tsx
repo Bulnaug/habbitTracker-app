@@ -35,7 +35,7 @@ export function HabitItem({
 
         
         <div className="mt-1 text-xs text-muted-foreground">
-          {progress}% за последние 7 дней
+  
         </div>
       </div>
 
