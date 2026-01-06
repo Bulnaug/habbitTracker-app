@@ -23,7 +23,7 @@ export function HabitItem({
             ${doneToday ? "opacity-70" : "opacity-100"}
          `}
     > 
-      <div className="mt-2">
+  
         
         <div className="h-2 w-full rounded bg-muted">
          
@@ -31,7 +31,7 @@ export function HabitItem({
             className="h-2 rounded bg-primary transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
-        </div>
+  
 
         
         <div className="mt-1 text-xs text-muted-foreground">
