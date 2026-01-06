@@ -1,21 +1,29 @@
 import { type Habit } from "../types/habit"
-import { getLastNDays } from "../utils/dates"
+import { getLastNDays } from "../utils/date"
+import type { Id } from "../../convex/_generated/dataModel"
 
-interface Props {
-  habits: Habit[]
+
+type Props = {
+  habits: {  // plural - массив привычек
+    _id: Id<"habits">
+    title: string
+    completedDates: string[]
+  }[]
 }
 
-export const Heatmap = ({ habits }: Props) => {
+// 2. Измените компонент
+export function Heatmap({ habits }: Props) {
   const days = getLastNDays(30)
 
   const getIntensity = (date: string) => {
-    const completed = habits.filter(h =>
-      h.completedDates.includes(date)
+    // Считаем сколько привычек выполнено в эту дату
+    const completedCount = habits.filter(habit =>
+      habit.completedDates.includes(date)
     ).length
 
-    if (completed === 0) return "bg-gray-200"
-    if (completed === 1) return "bg-green-200"
-    if (completed === 2) return "bg-green-400"
+    if (completedCount === 0) return "bg-gray-200"
+    if (completedCount === 1) return "bg-green-200"
+    if (completedCount === 2) return "bg-green-400"
     return "bg-green-600"
   }
 

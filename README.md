@@ -28,4 +28,5 @@ https://habbit-tracker-app-pi.vercel.app/
 - **Vite**
 - **Tailwind CSS**
 - **framer-motion**
+- **Datenbank convex**
 

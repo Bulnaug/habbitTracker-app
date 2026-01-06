@@ -1,22 +1,27 @@
-import { type Habit } from "../types/habit"
-import { calculateStreak } from "../utils/streak"
-import { AchievementBadges } from "./AchievementBadges"
+import { today } from "../utils/date"
+import type { Id } from "../../convex/_generated/dataModel"
+import { calculateProgress, calculateStreak } from "../hooks/habitStats"
 
-interface Props {
-  habit: Habit
-  today: string
-  onToggle: (id: string) => void
-  onDelete: (id: string) => void
+
+type Props = {
+  habit: {
+    _id: Id<"habits">
+    title: string
+    completedDates: string[]
+  }
+  onDelete: (id: Id<"habits">) => void
+  onToggle: (id: Id<"habits">) => void
 }
 
-export const HabitItem = ({
+export function HabitItem({
   habit,
-  today,
   onToggle,
-  onDelete,
-}: Props) => {
-  const completedToday = habit.completedDates.includes(today)
+  onRemove,
+}: any) {
+  const doneToday = habit.completedDates.includes(today())
+
   const streak = calculateStreak(habit.completedDates)
+  const progress = calculateProgress(habit.completedDates)  
 
   return (
     <div className={`
@@ -26,61 +31,76 @@ export const HabitItem = ({
             hover:scale-[1.01]
             transition-all
             duration-200
-            ${completedToday ? "opacity-70" : "opacity-100"}
-        `}>
-      <div className="group flex justify-between items-center">
-        <div>
-          <h3 className={`font-semibold text-lg ${completedToday ? "line-through opacity-60" : ""}`}>
-            {habit.title}
-          </h3>
-          <span className="text-sm text-gray-400 dark:text-gray-500">
-            🔥 {streak} Tg.
-          </span>
+            ${doneToday ? "opacity-70" : "opacity-100"}
+         `}
+    > 
+      <div className="mt-2">
+        {/* фон */}
+        <div className="h-2 w-full rounded bg-muted">
+          {/* заливка */}
+          <div
+            className="h-2 rounded bg-primary transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
         </div>
 
+        {/* подпись */}
+        <div className="mt-1 text-xs text-muted-foreground">
+          {progress}% за последние 7 дней
+        </div>
+      </div>
+
+
+      <div className="group flex justify-between items-center">
+        <div>
+          <span className={`font-semibold text-lg ${doneToday ? "line-through opacity-60" : ""}`}>
+            {habit.title}
+          </span>
+          <div className="text-sm text-gray-400 dark:text-gray-500">
+            🔥 {streak} day streak
+          </div>
+        </div>  
         <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition">
-          <button
-            onClick={() => onToggle(habit.id)}
+          <button 
+            onClick={() => onToggle(habit._id)}
             className={`
-                p-2
-                rounded-lg
-                opacity-60
-                transition
-                hover:opacity-100
-                hover:scale-110
-                active:scale-95
-                focus:outline-none
-                focus:ring-2
-                focus:ring-white/20
-                ${completedToday ? "text-green-500" : "text-gray-400"}
+                  p-2
+                  rounded-lg
+                  opacity-60
+                  transition
+                  hover:opacity-100
+                  hover:scale-110
+                  active:scale-95
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-white/20
+                  ${doneToday ? "text-green-500" : "text-gray-400"}
             `}
           >
             <span className="text-xl">✓</span>
           </button>
-
           <button
-            onClick={() => onDelete(habit.id)}
+            onClick={() => {
+              console.log("DELETE", habit._id)
+              onRemove(habit._id)
+            }}
             className="
-                p-2
-                rounded-lg
-                opacity-50
-                transition
-                hover:opacity-100
-                hover:scale-110
-                active:scale-95
-                focus:outline-none
-                focus:ring-2
-                focus:ring-white/20
+                  p-2
+                  rounded-lg
+                  opacity-50
+                  transition
+                  hover:opacity-100
+                  hover:scale-110
+                  active:scale-95
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-white/20
             "
           >
-             🗑
+            🗑
           </button>
         </div>
       </div>
-
-      <AchievementBadges
-        unlocked={habit.achievements ?? []}
-      />
     </div>
   )
 }
