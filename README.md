@@ -11,9 +11,9 @@ https://habbit-tracker-app-pi.vercel.app/
 
 ## ✨ Funktionen
 
-- 🔍 Habit einfugen
-- ✖️ Habit loschen
-- ☑️ Habit absolviert
+- 🔍 Gewohnheit einfugen
+- ✖️ Gewohnheit loschen
+- ☑️ Gewohnheit absolviert
 - 📊 Tagliche Progressbar
 - 📅 Monatliche Ubersicht
 - 🏆 Langfristige Achivements ( 7 Tage | 14 Tage | 30 Tage )
